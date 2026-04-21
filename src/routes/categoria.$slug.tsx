@@ -32,7 +32,7 @@ export const Route = createFileRoute("/categoria/$slug")({
 });
 
 function CategoryPage() {
-  const { category, products } = Route.useLoaderData();
+  const { category, products } = Route.useLoaderData() as LoaderData;
   return (
     <div>
       <header className="border-b border-line bg-surface">
