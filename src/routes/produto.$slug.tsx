@@ -1,12 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { formatBRL, getProductBySlug, PRODUCTS } from "@/lib/products";
+import { formatBRL, getProductBySlug, PRODUCTS, type Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductCard } from "@/components/ProductCard";
 import { IconArrowRight, IconCheck, IconReturn, IconShield, IconTruck } from "@/components/Icons";
 
+type LoaderData = { product: Product; related: Product[] };
+
 export const Route = createFileRoute("/produto/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): LoaderData => {
     const product = getProductBySlug(params.slug);
     if (!product) throw notFound();
     const related = PRODUCTS.filter(
